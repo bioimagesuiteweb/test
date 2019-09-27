@@ -1,11 +1,4 @@
 **/#*
 **/*~
 **/.#*
-**/TAGS
-**/.DS_Store
-**/.vscode
-*.js_full.*
-biselectron.js
-bispreload.js
-package-lock.json
-node_modules
+
