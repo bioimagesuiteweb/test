@@ -109,6 +109,24 @@
 	    "result"  : false,
 	    "dopython": true
 	},
+        {
+	    "command" : "computeVolume -i testdata/testvol.nii.gz --keepzero false --debug true",
+	    "test"    : "--test_target testdata/testvol.csv --test_type matrix --test_comparison ssd --test_threshold 0.01",
+	    "result"  : true,
+	    "dopython": false
+	},
+        {
+	    "command" : "computeVolume -i testdata/testvol4d.nii.gz --keepzero false --debug true",
+	    "test"    : "--test_target testdata/testvol4d.csv --test_type matrix --test_comparison ssd --test_threshold 0.01",
+	    "result"  : true,
+	    "dopython": false
+	},
+        {
+	    "command" : "computeVolume -i testdata/testvol4d.nii.gz --keepzero true --debug true",
+	    "test"    : "--test_target testdata/testvol4d.csv --test_type matrix --test_comparison ssd --test_threshold 0.01",
+	    "result"  : false,
+	    "dopython": false
+	},
 	{
 	    "command" : "thresholdImage -i testdata/MNI_6mm.nii.gz --low 128.0 --high 1000 --debug 1",
 	    "test"    : "--test_target testdata/newtests/MNI_thr.nii.gz ",
@@ -229,6 +247,13 @@
 	    "result"  : true,
 	    "dopython": true
 	},
+        {
+	    "command" : "clusterThreshold  --paramfile testdata/clusterThreshold_2019_10_22.param --input testdata/avg152T1_LR_nifti.nii.gz",
+	    "test"    : "--test_target testdata/avg152T1_LR_nifti__biggestcluster.nii.gz",
+	    "result"  : true,
+	    "dopython": true
+	},
+
 	{
 	    "command" : "displacementField -i testdata/MNI_6mm.nii.gz -x testdata/MNI_2mm_scaled.grd --debug true",
 	    "test"    : "--test_target testdata/MNI_6mm_scaleddispfield.nii.gz",
@@ -890,13 +915,21 @@
             "dopython": true
         },
         {
-	          "command" : "computeImageMatrixCorrelation -i testdata/indiv/prep.nii.gz -r testdata/indiv/group.nii.gz",
-	          "test"    : "--test_target testdata/indiv/imcorr.binmatr --test_type matrix --test_comparison ssd --test_threshold 0.01",
-	          "result"  : true,
-	          "dopython": true,
+	    "command" : "computeImageMatrixCorrelation -i testdata/indiv/prep.nii.gz -r testdata/indiv/group.nii.gz",
+	    "test"    : "--test_target testdata/indiv/imcorr.binmatr --test_type matrix --test_comparison ssd --test_threshold 0.01",
+	    "result"  : true,
+	    "dopython": true,
             "noweb"   : true,
             "skipjs"  : true
-	      }
+	},
+        {
+	    "command" : "imageDistanceMatrix -i testdata/distancematrix/distimage.nii.gz -m testdata/distancematrix/objmap.nii.gz --useradius false --sparsity 0.1 --numthreads 2",
+	    "test"    : "--test_target testdata/distancematrix/double.binmatr --test_type matrix --test_comparison ssd --test_threshold 0.01",
+	    "result"  : true,
+	    "dopython": true,
+            "noweb"   : true,
+            "skipjs"  : true
+	}
     ]
 }
 
