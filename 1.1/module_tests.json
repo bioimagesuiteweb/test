@@ -274,7 +274,7 @@
 	},
 	{
 	    "command" : "linearRegistration -t testdata/MNI_2mm_orig.nii.gz -r testdata/newtests/reg_input.nii.gz --intscale 2 --numbins  64 --levels  3 --imagesmoothing 1.0 --optimization ConjugateGradient --stepsize 0.25 --metric NMI --steps 1 --iterations 20 --mode Affine --resolution 1.1 --debug true",
-	    "test"    : "--test_target testdata/newtests/linear.matr --test_type matrixtransform ",
+	    "test"    : "--test_target testdata/newtests/linear2.matr --test_type matrixtransform ",
 	    "result"  : true,
 	    "dopython": true
 	},
@@ -935,7 +935,26 @@
             "test"    : "--test_type image --test_target testdata/jacobian/gold_zjac__blk.nii.gz --test_comparison ssd --test_threshold 0.1",
             "result"  : true,
             "dopython": false
+        },
+        {
+            "command" :"linearPointRegistration -r testdata/rpm/brain1.json -t testdata/rpm/brain1_rot.json --initialtemp 10.0 --finaltemp 2.0 --matchmode RPM --dowarp true --mode Rigid",
+            "test"    : "--test_type surfaceregistration --test_target testdata/rpm/true_rotated.json --test_comparison ssd --test_threshold 0.1",
+            "result"  : true,
+            "dopython" : false
+        },
+        {
+            "command" :"linearPointRegistration -r testdata/rpm/brain1.json -t testdata/rpm/brain1_rot.json --initialtemp 10.0 --finaltemp 2.0 --matchmode ICP --dowarp true --mode Rigid",
+            "test"    : "--test_type surfaceregistration --test_target testdata/rpm/true_rotated_icp.json --test_comparison ssd --test_threshold 0.1",
+            "result"  : true,
+            "dopython" : false
+        },
+        {
+            "command" :"linearPointRegistration -r testdata/rpm/brain1.json -t testdata/rpm/brain1_rot.json --initialtemp 10.0 --finaltemp 2.0 --matchmode RPM --dowarp true --mode Rigid",
+            "test"    : "--test_type surfaceregistration --test_target testdata/rpm/true_rotated_icp.json --test_comparison ssd --test_threshold 0.1",
+            "result"  : false,
+            "dopython" : false
         }
+
         
     ]
 }
